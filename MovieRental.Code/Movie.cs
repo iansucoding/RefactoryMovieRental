@@ -28,6 +28,49 @@
         {
             return _title;
         }
+
+        /// <summary>
+        /// 計算費用
+        /// </summary>
+        /// <param name="daysRented">租約長度</param>
+        public double GetCharge(int daysRented)
+        {
+            double result = 0;
+            switch (GetPriceCode())
+            {
+                case PriceCode.Regular:
+                    result += 2;
+                    if (daysRented > 2)
+                    {
+                        result += (daysRented - 2) * 1.5;
+                    }
+                    break;
+
+                case PriceCode.NewRelease:
+                    result += daysRented * 3;
+                    break;
+
+                case PriceCode.Childrens:
+                    result += 1.5;
+                    if (daysRented > 3)
+                    {
+                        result += (daysRented - 3) * 1.5;
+                    }
+                    break;
+            }
+
+            return result;
+        }
+
+        public int GetFrequentRenterPoints(int daysRented)
+        {
+            if (GetPriceCode() == PriceCode.NewRelease && daysRented > 1)
+            {
+                return 2;
+            }
+
+            return 1;
+        }
     }
 
     /// <summary>

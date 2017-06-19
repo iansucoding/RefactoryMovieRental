@@ -26,41 +26,12 @@
 
         public double GetCharge()
         {
-            double result = 0;
-            switch (GetMovie().GetPriceCode())
-            {
-                case PriceCode.Regular:
-                    result += 2;
-                    if (GetDaysRented() > 2)
-                    {
-                        result += (GetDaysRented() - 2) * 1.5;
-                    }
-                    break;
-
-                case PriceCode.NewRelease:
-                    result += GetDaysRented() * 3;
-                    break;
-
-                case PriceCode.Childrens:
-                    result += 1.5;
-                    if (GetDaysRented() > 3)
-                    {
-                        result += (GetDaysRented() - 3) * 1.5;
-                    }
-                    break;
-            }
-
-            return result;
+            return _movie.GetCharge(_daysRented);
         }
 
         public int GetFrequentRenterPoints()
         {
-            if (GetMovie().GetPriceCode() == PriceCode.NewRelease && GetDaysRented() > 1)
-            {
-                return 2;
-            }
-
-            return 1;
+            return _movie.GetFrequentRenterPoints(_daysRented);
         }
     }
 }

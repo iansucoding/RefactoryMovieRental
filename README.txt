@@ -32,6 +32,18 @@ Customer裡的Statement()做的事情太多了，它做了很多原本應該由其他類完成的事情。
 
 過多的臨時變數會讓函數變得冗長。這裡有兩個臨時變數totalAmount和frequentRenterPoints，都是從Rental物件中獲取某個總量，且可能會設計新的函數(例如HtmlStatement()返回html格式的字串)來取得這兩個變數，所以打算建立查詢函數並減少原本函數程式碼來促成乾淨的設計。
 
+7.取代與價格相關的條件邏輯
+
+最好不要在另一個物件的屬性基礎上運用switch語句。如果不得不使用也應該在物件自己的數據上使用，而不是別人的數據上使用，這暗示Rental類的GetCharge()應該搬到Movie類裡面去。
+Rental類的GetFrequentRenterPoints()根據影片類型而變化，所以也放到影片類型所屬的類中。
+
+
+
+
+
+
+
+
 
 
 
