@@ -20,6 +20,13 @@ Customer裡的Statement()做的事情太多了，它做了很多原本應該由其他類完成的事情。
 
 提取出來的新函數裡面的兩個變數each和thisAmount，為了讓程式能夠清楚表達自己的功能，所以分別改名為aRental和result。
 
+4.搬移[金額計算]程式碼
+
+觀察AmountFor()時發現使用了Rental類卻沒有使用Customer類的信息。絕大多數情況下函數應該放在它所使用的數據的所屬物件內，所以AmountFor()應該移到Rental類去。
+
+
+
+
 
 
 

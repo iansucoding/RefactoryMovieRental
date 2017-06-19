@@ -36,8 +36,7 @@ namespace MovieRental.Code
             string result = $"Rental Record for {GetName()} \n";
             foreach (var each in _rentals)
             {
-                double thisAmount = 0;
-                thisAmount = AmountFor(each);
+                double thisAmount = each.GetCharge();
 
                 // add frequent renter points
                 frequentRenterPoints++;
@@ -55,35 +54,6 @@ namespace MovieRental.Code
             // ad footer lines
             result += "Amount owed is " + totalAmount.ToString() + "\n";
             result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points";
-            return result;
-        }
-
-        private double AmountFor(Rental aRental)
-        {
-            double result = 0;
-            switch (aRental.GetMovie().GetPriceCode())
-            {
-                case PriceCode.Regular:
-                    result += 2;
-                    if (aRental.GetDaysRented() > 2)
-                    {
-                        result += (aRental.GetDaysRented() - 2) * 1.5;
-                    }
-                    break;
-
-                case PriceCode.NewRelease:
-                    result += aRental.GetDaysRented() * 3;
-                    break;
-
-                case PriceCode.Childrens:
-                    result += 1.5;
-                    if (aRental.GetDaysRented() > 3)
-                    {
-                        result += (aRental.GetDaysRented() - 3) * 1.5;
-                    }
-                    break;
-            }
-
             return result;
         }
     }
