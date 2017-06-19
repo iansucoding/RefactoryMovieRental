@@ -38,6 +38,10 @@ Customer裡的Statement()做的事情太多了，它做了很多原本應該由其他類完成的事情。
 Rental類的GetFrequentRenterPoints()根據影片類型而變化，所以也放到影片類型所屬的類中。
 
 
+8.多型與繼承
+
+為Movie建立Price類和Price的三個子類，每個都有自己的計費方法，這樣就可以用多型取代switch語句。
+
 
 
 

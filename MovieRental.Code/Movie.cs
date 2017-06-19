@@ -6,22 +6,35 @@
     public class Movie
     {
         private string _title;
-        private PriceCode _priceCode;
+        private Price _price;
 
         public Movie(string title, PriceCode priceCode)
         {
             this._title = title;
-            this._priceCode = priceCode;
+            SetPriceCode(priceCode);
         }
 
         public PriceCode GetPriceCode()
         {
-            return this._priceCode;
+            return _price.GetPriceCode();
         }
 
         public void SetPriceCode(PriceCode arg)
         {
-            this._priceCode = arg;
+            switch (arg)
+            {
+                case PriceCode.Regular:
+                    this._price = new RegularPrice();
+                    break;
+
+                case PriceCode.NewRelease:
+                    this._price = new NewReleasePrice();
+                    break;
+
+                case PriceCode.Childrens:
+                    this._price = new ChildrensPrice();
+                    break;
+            }
         }
 
         public string GetTitle()
@@ -35,31 +48,7 @@
         /// <param name="daysRented">租約長度</param>
         public double GetCharge(int daysRented)
         {
-            double result = 0;
-            switch (GetPriceCode())
-            {
-                case PriceCode.Regular:
-                    result += 2;
-                    if (daysRented > 2)
-                    {
-                        result += (daysRented - 2) * 1.5;
-                    }
-                    break;
-
-                case PriceCode.NewRelease:
-                    result += daysRented * 3;
-                    break;
-
-                case PriceCode.Childrens:
-                    result += 1.5;
-                    if (daysRented > 3)
-                    {
-                        result += (daysRented - 3) * 1.5;
-                    }
-                    break;
-            }
-
-            return result;
+            return _price.GetCharge(daysRented);
         }
 
         public int GetFrequentRenterPoints(int daysRented)
