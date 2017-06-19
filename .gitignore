@@ -1,0 +1,6 @@
+.vs/
+
+packages/
+MovieRental.Code/obj
+MovieRental.Code/bin
+MovieRental.Code/Properties/AssemblyInfo.cs
