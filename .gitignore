@@ -4,3 +4,6 @@ packages/
 MovieRental.Code/obj
 MovieRental.Code/bin
 MovieRental.Code/Properties/AssemblyInfo.cs
+MovieRental.Tests/obj
+MovieRental.Tests/bin
+MovieRental.Tests/Properties/AssemblyInfo.cs
