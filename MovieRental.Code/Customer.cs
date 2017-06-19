@@ -31,24 +31,36 @@ namespace MovieRental.Code
         /// <returns></returns>
         public string Statement()
         {
-            double totalAmount = 0;
-            int frequentRenterPoints = 0; // 積分
             string result = $"Rental Record for {GetName()} \n";
             foreach (var each in _rentals)
             {
-                double thisAmount = each.GetCharge();
-                frequentRenterPoints = each.GetFrequentRenterPoints();
-
                 // show figures for this rental
-                result += "\t" + each.GetMovie().GetTitle() + "\t" + thisAmount.ToString() + "\n";
-                totalAmount += thisAmount;
+                result += "\t" + each.GetMovie().GetTitle() + "\t" + each.GetCharge() + "\n";
             }
             // ad footer lines
-            result += "Amount owed is " + totalAmount.ToString() + "\n";
-            result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points";
+            result += "Amount owed is " + GetTotalCharge().ToString() + "\n";
+            result += "You earned " + GetTotalrequentRenterPoints().ToString() + " frequent renter points";
             return result;
         }
 
+        private double GetTotalCharge()
+        {
+            double result = 0;
+            foreach (var each in _rentals)
+            {
+                result += each.GetCharge();
+            }
+            return result;
+        }
 
+        private int GetTotalrequentRenterPoints()
+        {
+            int result = 0;
+            foreach (var each in _rentals)
+            {
+                result += each.GetFrequentRenterPoints();
+            }
+            return result;
+        }
     }
 }
