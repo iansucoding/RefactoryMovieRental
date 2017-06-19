@@ -37,15 +37,7 @@ namespace MovieRental.Code
             foreach (var each in _rentals)
             {
                 double thisAmount = each.GetCharge();
-
-                // add frequent renter points
-                frequentRenterPoints++;
-
-                // add bonus for two day new release rental
-                if (each.GetMovie().GetPriceCode() == PriceCode.NewRelease && each.GetDaysRented() > 1)
-                {
-                    frequentRenterPoints++;
-                }
+                frequentRenterPoints = each.GetFrequentRenterPoints();
 
                 // show figures for this rental
                 result += "\t" + each.GetMovie().GetTitle() + "\t" + thisAmount.ToString() + "\n";
@@ -56,5 +48,7 @@ namespace MovieRental.Code
             result += "You earned " + frequentRenterPoints.ToString() + " frequent renter points";
             return result;
         }
+
+
     }
 }
